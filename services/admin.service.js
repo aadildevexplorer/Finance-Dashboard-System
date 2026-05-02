@@ -1,5 +1,6 @@
 const Record = require("../models/record.model");
-const User = require("../models/user.model");
+const Auth = require("../models/auth.model");
+const bcrypt = require("bcryptjs");
 
 // get all records
 const getAllRecordsService = async (query) => {
@@ -47,13 +48,21 @@ const createUserServiceFromAdmin = async (data) => {
     throw new Error("All fields are required");
   }
 
-  const existingUser = await User.findOne({ email });
+  const existingUser = await Auth.findOne({ email });
 
   if (existingUser) {
     throw new Error("User already exists");
   }
 
-  const user = await User.create(data);
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = await Auth.create({
+    name,
+    email,
+    password: hashedPassword,
+    role,
+    status,
+  });
 
   return user;
 };

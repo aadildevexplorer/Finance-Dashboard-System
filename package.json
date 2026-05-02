@@ -1,11 +1,11 @@
 {
-  "name": "Finance Dashboard System",
+  "name": "finance-dashboard-system",
   "version": "1.0.0",
   "description": "",
-  "main": "Press ^C at any time to quit.",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon ./server.js",
-    "start": "node ./backend/server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Mohammad Aadil",
   "license": "ISC",
